@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://json.schemastore.org/mkdocs-1.0.json
+site_name: Friendly FHIR
+copyright: Friendly FHIR Contributors 2024
+repo_name: friendly-fhir.friendly-fhir.github.io
+repo_url: https://github.com/friendly-fhir/friendly-fhir.github.io
+remote_branch: origin/master
+remote_name: origin
+site_author: Matthew Rodusek
+site_description: The Friendly FHIR organization
+site_url: https://friendly-fhir.github.io
+site_dir: dist
+docs_dir: docs
+
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - yaml
+    - go
+    - protobuf
+    - markdown
+    - shell
+  features:
+    - search.suggest
+    - search.share
+plugins:
+  - search
+  - mermaid2
+
+nav:
+  - 🏠 Home: index.md
+  - 📚 Other Resources:
+      - HL7 FHIR: https://www.hl7.org/fhir/
+      - FSH School: https://fshschool.org/
