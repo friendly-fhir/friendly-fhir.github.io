@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Presubmit
+
+on:
+  workflow_call:
+  pull_request:
+    branches:
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  markdown-lint:
+    name: Markdown Lint
+    uses: friendly-fhir/.github/.github/workflows/markdown-lint.yaml@master
+    with:
+      config: .markdownlint.jsonc
+      globs: |
+        README.md
+        docs/**/*.md
+        .github/**/*.md
+    permissions:
+      contents: read
