@@ -22,6 +22,12 @@ jobs:
         with:
           python-version: "3.10"
 
+      - name: Read metadata
+        id: metadata
+        run: |
+          site_dir=$(yq '.site_dir // "dist"' mkdocs.yaml)
+          echo "site-dir=${site_dir}" >> "${GITHUB_OUTPUT}"
+
       - name: Install dependencies
         run: |
           pip install mkdocs
@@ -37,13 +43,18 @@ jobs:
       # this.
       - name: Fix permissions
         run: |
-          find ./dist -type d -exec chmod 0755 {} \;
-          find ./dist -type f -name '.lock' -delete
+          site_dir="${{ steps.metadata.outputs.site-dir }}"
+          find "./${site_dir}" -type d -exec chmod 0755 {} \;
+          find "./${site_dir}" -type f -name '.lock' -delete
+
+      - name: Create CNAME record
+        run: |
+          echo "friendly-fhir.org" > "${{ steps.metadata.outputs.site-dir }}/CNAME"
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/
+          path: ${{ steps.metadata.outputs.site-dir }}/
 
   deploy:
     name: Deploy to GH Pages
