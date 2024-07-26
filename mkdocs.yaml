@@ -29,6 +29,9 @@ plugins:
 
 nav:
   - 🏠 Home: index.md
+  - 💼 Policies:
+    - Open-Source Licensing: policies/open-source-licensing.md
+    - PII Confidentiality Impact: policies/pii-confidentiality-impact.md
   - 📚 Other Resources:
       - HL7 FHIR: https://www.hl7.org/fhir/
       - FSH School: https://fshschool.org/
